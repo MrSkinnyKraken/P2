@@ -6,7 +6,7 @@ package deim.urv.cat.homework2.service;
 
 /**
  *
- * @author rpino
+ * @author rpino & arnau
  */
 
 import deim.urv.cat.homework2.model.*;

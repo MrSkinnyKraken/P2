@@ -1,0 +1,4 @@
+*.war
+Homework2/target/
+**/build/
+Homework2/nbproject/
