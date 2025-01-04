@@ -6,11 +6,11 @@ package deim.urv.cat.homework2.controller;
  */
 
 /**
- *
- * @author rpino
+ * 
+ * @author arnau & rafa
  */
 
-import deim.urv.cat.homework2.model.*;
+//import deim.urv.cat.homework2.model.*;
 import deim.urv.cat.homework2.service.ArticleService;
 
 import jakarta.inject.Inject;

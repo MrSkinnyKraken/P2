@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ArticleService {
-
+    
     private List<Article> articles;
     public List<Article> getAllArticles() {
         return articles;
