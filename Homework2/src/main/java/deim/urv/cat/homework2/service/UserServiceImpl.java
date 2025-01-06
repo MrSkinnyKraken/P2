@@ -11,13 +11,13 @@ import jakarta.ws.rs.client.ClientBuilder;
 public class UserServiceImpl implements UserService {
     private final WebTarget webTarget;
     private final jakarta.ws.rs.client.Client client;
-    private static final String BASE_URI = "http://localhost:8080/UserService/rest/api";
+    private static final String BASE_URI = "http://localhost:8080/P1/rest/api/v1/";
     
     public UserServiceImpl() {
         client = ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("user");
+        webTarget = client.target(BASE_URI).path("customer");
     }
-    
+
     @Override
     public User findUserByEmail(String email){
         Response response = webTarget.path(email)
@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
        Response response = webTarget.request(MediaType.APPLICATION_JSON)
                .post(Entity.entity(user, MediaType.APPLICATION_JSON), 
                     Response.class);
-     return response.getStatus() == 201;
+     return response.getStatus() == 204;
     }
 
 }

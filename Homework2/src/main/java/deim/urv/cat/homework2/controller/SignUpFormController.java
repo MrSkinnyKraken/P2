@@ -66,8 +66,11 @@ public class SignUpFormController {
             attempts.increment();
             return "signup-form.jsp";
         }
+        
+        if (!service.addUser(userForm)){
+            return "signup-form.jsp";
+        }
         log.log(Level.INFO, "Redirecting to the success page.");
-        service.addUser(userForm);
         attempts.reset();
         return "signup-success.jsp";
     } 
