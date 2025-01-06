@@ -1,6 +1,6 @@
 package deim.urv.cat.homework2.service;
 
-import deim.urv.cat.homework2.model.User;
+import deim.urv.cat.homework2.model.UserDTO;
 import deim.urv.cat.homework2.controller.UserForm;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
@@ -19,12 +19,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByEmail(String email){
+    public UserDTO findUserByEmail(String email){
         Response response = webTarget.path(email)
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         if (response.getStatus() == 200) {
-            return response.readEntity(User.class);
+            return response.readEntity(UserDTO.class);
         }
         return null;
     }

@@ -7,7 +7,7 @@ package deim.urv.cat.homework2.model;
 import java.io.Serializable;
 
 //TIENE QUE SER SESSION SCOPE
-public class Credentials implements Serializable { 
+public class CredentialsDTO implements Serializable { 
     
     private Long id;
     
@@ -15,13 +15,13 @@ public class Credentials implements Serializable {
     
     private String password;
     
-    private User user;
+    private UserDTO user;
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 

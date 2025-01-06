@@ -9,7 +9,7 @@ import java.util.List;
  * 
  */
 
-public class User implements Serializable{
+public class UserDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -22,23 +22,23 @@ public class User implements Serializable{
     
     private String apiKey;
     
-    private List<Article> articles;
+    private List<ArticleDTO> articles;
     
-    private List<Credentials> credentials;
+    private List<CredentialsDTO> credentials;
 
-    public List<Credentials> getCredentials() {
+    public List<CredentialsDTO> getCredentials() {
         return credentials;
     }
 
-    public void setCredentials(List<Credentials> credentials) {
+    public void setCredentials(List<CredentialsDTO> credentials) {
         this.credentials = credentials;
     }
 
     // Constructors
-    public User() {
+    public UserDTO() {
     }
 
-    public User(String email, String name, String password, String apiKey) {
+    public UserDTO(String email, String name, String password, String apiKey) {
         this.email = email;
         this.name = name;
         this.password = password;
@@ -86,11 +86,11 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public List<Article> getArticles() {
+    public List<ArticleDTO> getArticles() {
         return articles;
     }
 
-    public void setArticles(List<Article> articles) {
+    public void setArticles(List<ArticleDTO> articles) {
         this.articles = articles;
     }
 }

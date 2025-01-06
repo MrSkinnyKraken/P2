@@ -14,7 +14,7 @@ import java.util.*;
  * 
  */
 
-public class Article implements Serializable{
+public class ArticleDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -27,19 +27,19 @@ public class Article implements Serializable{
 
     private int views;
     
-    private User author;
+    private UserDTO author;
 
     private LocalDateTime publishedDate;
 
-    private List<Topic> topics;
+    private List<TopicDTO> topics;
 
     private boolean isPrivate;
 
     // Constructors
-    public Article() {
+    public ArticleDTO() {
     }
 
-    public Article(String title, String summary, String fullText, User author, List<Topic> topics, boolean isPrivate) {
+    public ArticleDTO(String title, String summary, String fullText, UserDTO author, List<TopicDTO> topics, boolean isPrivate) {
         this.title = title;
         this.summary = summary;
         this.fullText = fullText;
@@ -70,7 +70,7 @@ public class Article implements Serializable{
         return views;
     }
 
-    public User getAuthor() {
+    public UserDTO getAuthor() {
         return author;
     }
 
@@ -78,7 +78,7 @@ public class Article implements Serializable{
         return publishedDate;
     }
 
-    public List<Topic> getTopics() {
+    public List<TopicDTO> getTopics() {
         return topics;
     }
 
@@ -108,7 +108,7 @@ public class Article implements Serializable{
         this.views = views;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(UserDTO author) {
         this.author = author;
     }
 
@@ -116,7 +116,7 @@ public class Article implements Serializable{
         this.publishedDate = publishedDate;
     }
 
-    public void setTopics(List<Topic> topics) {
+    public void setTopics(List<TopicDTO> topics) {
         this.topics = topics;
     }
 
