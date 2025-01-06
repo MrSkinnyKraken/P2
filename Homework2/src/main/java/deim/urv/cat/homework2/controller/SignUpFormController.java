@@ -68,7 +68,7 @@ public class SignUpFormController {
         }
         
         if (!service.addUser(userForm)){
-            return "signup-form.jsp";
+            return "Error404.jsp";
         }
         log.log(Level.INFO, "Redirecting to the success page.");
         attempts.reset();

@@ -12,7 +12,6 @@ public class UserServiceImpl implements UserService {
     private final WebTarget webTarget;
     private final jakarta.ws.rs.client.Client client;
     private static final String BASE_URI = "http://localhost:8080/P1/rest/api/v1/";
-    
     public UserServiceImpl() {
         client = ClientBuilder.newClient();
         webTarget = client.target(BASE_URI).path("customer");
@@ -34,7 +33,7 @@ public class UserServiceImpl implements UserService {
        Response response = webTarget.request(MediaType.APPLICATION_JSON)
                .post(Entity.entity(user, MediaType.APPLICATION_JSON), 
                     Response.class);
-     return response.getStatus() == 204;
+     return response.getStatus() == 201;
     }
 
 }
