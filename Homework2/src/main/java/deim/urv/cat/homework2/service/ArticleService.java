@@ -4,36 +4,21 @@
  */
 package deim.urv.cat.homework2.service;
 
+import deim.urv.cat.homework2.model.ArticleDTO;
+import java.util.List;
+
 /**
  *
- * @author rpino & arnau
+ * @author arnau &rafa
  */
-
-import deim.urv.cat.homework2.model.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class ArticleService {
-    
-    private List<Article> articles;
-    public List<Article> getAllArticles() {
-        return articles;
-    }
-
-    public List<Article> getFilteredArticles(List<Topic> topic, User author) {
-        return articles.stream()
-            .filter(a -> (topic == null || topic.isEmpty() || a.getTopics().equals(topic)) &&
-                         (author == null || a.getAuthor().equals(author)))
-            .collect(Collectors.toList());
-    }
-
-    public Article getArticleById(int id) {
-        return articles.stream()
-            .filter(a -> a.getId() == id)
-            .findFirst()
-            .orElse(null);
-    }
-
-
+public interface ArticleService {
+    public List<ArticleDTO> getAllArticles();
+    public ArticleDTO getArticleById(Long id);
+    public ArticleDTO createArticle(ArticleDTO article);
+    public ArticleDTO updateArticle(Long id, ArticleDTO article);
+    public boolean deleteArticle(Long id);
+    public List<ArticleDTO> getArticlesByTopic(String topic);
+    public List<ArticleDTO> getArticlesByAuthor(Long authorId);
+    public ArticleDTO getArticleByAuthorAndTopics(Long authorId, List<String> topics);
+    public void close();
 }

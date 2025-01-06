@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author arnau & rafa
  * 
  */
-public class Topic implements Serializable {
+public class TopicDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String name;
@@ -42,10 +42,10 @@ public class Topic implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Topic)) {
+        if (!(object instanceof TopicDTO)) {
             return false;
         } else{
-            Topic other = (Topic) object;
+            TopicDTO other = (TopicDTO) object;
             return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
         }
         
