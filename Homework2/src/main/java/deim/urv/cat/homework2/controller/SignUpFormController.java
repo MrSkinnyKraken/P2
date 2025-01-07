@@ -42,6 +42,7 @@ public class SignUpFormController {
     @CsrfProtected
     public String signUp(@Valid @BeanParam UserForm userForm) {
         models.put("user", userForm);
+        
         if (bindingResult.isFailed()) {
             AlertMessage alert = AlertMessage.danger("Validation failed!");
             bindingResult.getAllErrors()
@@ -68,7 +69,7 @@ public class SignUpFormController {
         }
         
         if (!service.addUser(userForm)){
-            return "Error404.jsp";
+            return "signup-form.jsp";
         }
         log.log(Level.INFO, "Redirecting to the success page.");
         attempts.reset();

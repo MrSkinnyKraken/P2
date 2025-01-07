@@ -19,7 +19,6 @@
 <body>
 	<div class="container">
 		<div class="col-md-offset-2 col-md-7">
-			<h2 class="text-center">Skeleton Structure for Homework 2</h2>
 			<div class="panel panel-info">
 				<div class="panel-heading">
 					<div class="panel-title">Sign Up</div>
@@ -35,16 +34,15 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="lastname" class="col-md-3 control-label">Last
-								Name</label>
-							<div class="col-md-9">
-                                                            <input type="text" name="lastName" value="${user.lastName}" class="form-control" />
-							</div>
-						</div>
-						<div class="form-group">
 							<label for="email" class="col-md-3 control-label">Email</label>
 							<div class="col-md-9">
                                                             <input type="text" name="email" value="${user.email}" class="form-control" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-md-3 control-label">Password</label>
+							<div class="col-md-9">
+                                                            <input type="password" name="password" value="${user.password}" class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -84,6 +82,5 @@
 			</div>
 		</div>
 	</div>
-        <jsp:include page="/WEB-INF/views/layout/footer.jsp" />
 </body>
 </html>
