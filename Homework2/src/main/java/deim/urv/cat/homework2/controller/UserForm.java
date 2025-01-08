@@ -25,7 +25,7 @@ public class UserForm implements Serializable {
     @NotBlank
     @MvcBinding
     @FormParam("password")
-    private String passsword;
+    private String password;
 
     @NotBlank
     @FormParam("email")
@@ -33,12 +33,12 @@ public class UserForm implements Serializable {
     @MvcBinding
     private String email;
 
-    public String getPasssword() {
-        return passsword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasssword(String passsword) {
-        this.passsword = passsword;
+    public void setPassword(String passsword) {
+        this.password = passsword;
     }
     
     

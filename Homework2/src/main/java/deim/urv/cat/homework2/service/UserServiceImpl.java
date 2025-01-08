@@ -12,6 +12,7 @@ public class UserServiceImpl implements UserService {
     private final WebTarget webTarget;
     private final jakarta.ws.rs.client.Client client;
     private static final String BASE_URI = "http://localhost:8080/P1/rest/api/v1/";
+    
     public UserServiceImpl() {
         client = ClientBuilder.newClient();
         webTarget = client.target(BASE_URI).path("customer");
@@ -19,9 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findUserByEmail(String email){
-        Response response = webTarget.path(email)
-                .request(MediaType.APPLICATION_JSON)
-                .get();
+            Response response = webTarget.path("email").path(email)
+            .request(MediaType.APPLICATION_JSON)
+            .get();
         if (response.getStatus() == 200) {
             return response.readEntity(UserDTO.class);
         }
