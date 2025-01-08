@@ -27,10 +27,9 @@
 					<form action="${mvc.uri('sign-up')}" class="form-horizontal" method="POST">
                                                 <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
 						<div class="form-group">
-							<label for="firstname" class="col-md-3 control-label">First
-								Name</label>
+							<label for="name" class="col-md-3 control-label">Name</label>
 							<div class="col-md-9">
-                                                            <input type="text" name="firstName" value="${user.firstName}" class="form-control" />
+                                                            <input type="text" name="name" value="${user.name}" class="form-control" />
 							</div>
 						</div>
 						<div class="form-group">

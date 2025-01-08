@@ -29,12 +29,40 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    @Override
-    public boolean addUser(UserForm user) {
-       Response response = webTarget.request(MediaType.APPLICATION_JSON)
-               .post(Entity.entity(user, MediaType.APPLICATION_JSON), 
-                    Response.class);
-     return response.getStatus() == 201;
+@Override
+public boolean addUser(UserForm user) {
+    try {
+        // Realizar la solicitud POST
+        Response response = webTarget.request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(user, MediaType.APPLICATION_JSON), Response.class);
+
+        // Verificar el código de estado
+        if (response.getStatus() == 201) {
+            return true; // Usuario creado exitosamente
+        } else {
+            // Manejar errores según el código de estado
+            String errorMessage = response.readEntity(String.class);
+            System.err.println("Error al agregar usuario. Código de estado: " 
+                                + response.getStatus() + ", Mensaje: " + errorMessage);
+            return false;
+        }
+    } catch (jakarta.ws.rs.ProcessingException e) {
+        // Error de procesamiento (por ejemplo, deserialización fallida)
+        System.err.println("Error de procesamiento durante la solicitud POST: " + e.getMessage());
+        e.printStackTrace();
+        return false;
+    } catch (jakarta.ws.rs.WebApplicationException e) {
+        // Error general de la API web (por ejemplo, problemas de red)
+        System.err.println("Error en la comunicación con el servidor: " + e.getMessage());
+        e.printStackTrace();
+        return false;
+    } catch (Exception e) {
+        // Cualquier otro error inesperado
+        System.err.println("Ocurrió un error inesperado: " + e.getMessage());
+        e.printStackTrace();
+        return false;
     }
+}
+
 
 }
