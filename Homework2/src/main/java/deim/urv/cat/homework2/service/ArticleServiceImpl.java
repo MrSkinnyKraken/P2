@@ -51,38 +51,6 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleDTO createArticle(ArticleDTO article) {
-        Response response = webTarget
-                .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(article, MediaType.APPLICATION_JSON));
-        if (response.getStatus() == 201) {
-            return response.readEntity(ArticleDTO.class);
-        }
-        return null;
-    }
-
-    @Override
-    public ArticleDTO updateArticle(Long id, ArticleDTO article) {
-        Response response = webTarget.path("{id}")
-                .resolveTemplate("id", id)
-                .request(MediaType.APPLICATION_JSON)
-                .put(Entity.entity(article, MediaType.APPLICATION_JSON));
-        if (response.getStatus() == 200) {
-            return response.readEntity(ArticleDTO.class);
-        }
-        return null;
-    }
-
-    @Override
-    public boolean deleteArticle(Long id) {
-        Response response = webTarget.path("{id}")
-                .resolveTemplate("id", id)
-                .request()
-                .delete();
-        return response.getStatus() == 204;
-    }
-
-    @Override
     public List<ArticleDTO> getArticlesByTopic(String topic) {
         Response response = webTarget.path("topic/{topic}")
                 .resolveTemplate("topic", topic)
@@ -107,11 +75,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
     
     @Override
-    public ArticleDTO getArticleByAuthorAndTopics(Long authorId, List<String> topics) {
+    public ArticleDTO getArticleByAuthorAndTopics(Long authorId, String topic) {
         Response response = webTarget.path("author/{authorId}/topics")
                 .resolveTemplate("authorId", authorId)
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(topics, MediaType.APPLICATION_JSON));
+                .post(Entity.entity(topic, MediaType.APPLICATION_JSON));
         if (response.getStatus() == 200) {
             return response.readEntity(ArticleDTO.class);
         }
