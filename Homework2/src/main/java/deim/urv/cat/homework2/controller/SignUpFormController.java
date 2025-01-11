@@ -71,7 +71,7 @@ public class SignUpFormController {
         if(!service.addUser(userForm)){
             // Try again
             log.log(Level.WARNING, "{0}", userForm.toString());
-            models.put("message", "no lo añado perra!");
+            models.put("message", "Error al afegir-ho");
             return "signup-form.jsp";
         }
         attempts.reset();
