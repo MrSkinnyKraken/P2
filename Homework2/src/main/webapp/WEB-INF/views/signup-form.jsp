@@ -44,12 +44,16 @@
                                                             <input type="password" name="password" value="${user.password}" class="form-control" />
 							</div>
 						</div>
-						<div class="form-group">
-							<!-- Button -->
-							<div class="col-md-offset-3 col-md-9">
-								<input type="submit" value="Submit" />
-							</div>
-						</div>
+                                                <div class="form-group">
+                                                    <!-- Botones -->
+                                                    <div class="col-md-offset-3 col-md-9">
+                                                        <!-- Botón Submit -->
+                                                        <input type="submit" value="Submit" class="btn btn-primary" />
+
+                                                        <!-- Botón para seguir sin iniciar sesión -->
+                                                        <a href="${pageContext.request.contextPath}/Web/articles" class="btn btn-primary">Continue without signing up</a>
+                                                    </div>
+                                                </div>
 					</form>
                                         <c:if test="${not empty message}">
                                             <div class="alert alert-danger" role="alert">

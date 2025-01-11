@@ -1,7 +1,6 @@
 package deim.urv.cat.homework2.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *

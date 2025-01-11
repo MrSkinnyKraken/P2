@@ -8,32 +8,31 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 
-/**
- *
- * @author arnau & rafa
- * 
- */
 
 public class ArticleDTO implements Serializable{
-    private static final long serialVersionUID = 1L;
-
     private Long id;
 
     private String title;
 
+   
     private String summary;
 
+  
     private String fullText;
 
     private int views;
-    
+
+
     private UserDTO author;
 
     private LocalDateTime publishedDate;
 
+
     private List<TopicDTO> topics;
 
     private boolean isPrivate;
+
+    private String image; //link to image
 
     // Constructors
     public ArticleDTO() {
@@ -86,6 +85,11 @@ public class ArticleDTO implements Serializable{
         return isPrivate;
     }
     
+    public String getImage() {
+        return image;
+    }
+
+    
     //Setters
 
     public void setId(Long id) {
@@ -124,5 +128,8 @@ public class ArticleDTO implements Serializable{
         this.isPrivate = isPrivate;
     }
     
+        public void setImage(String img) {
+        this.image = img;
+    }
     
 }

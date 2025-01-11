@@ -10,7 +10,6 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import deim.urv.cat.homework2.model.*;
-import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.Response;
 
 /**
@@ -18,7 +17,7 @@ import jakarta.ws.rs.core.Response;
  * @author arnau & rafa
  */
 public class ArticleServiceImpl implements ArticleService {
-    private static final String BASE_URI = "http://localhost:8080/rest/api/v1";
+    private static final String BASE_URI = "http://localhost:8080/P1/rest/api/v1";
     private final WebTarget webTarget;
     private final jakarta.ws.rs.client.Client client;
     
@@ -50,10 +49,10 @@ public class ArticleServiceImpl implements ArticleService {
         return null;
     }
 
-    @Override
-    public List<ArticleDTO> getArticlesByTopic(String topic) {
-        Response response = webTarget.path("topic/{topic}")
-                .resolveTemplate("topic", topic)
+@Override
+    public List<ArticleDTO> getArticlesByTopic(List<String> topicNames) {
+        // "/rest/api/v1/article?topic={topic1}&author={author}"
+        Response response = webTarget.queryParam("topic", topicNames)
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         if (response.getStatus() == 200) {
@@ -62,10 +61,10 @@ public class ArticleServiceImpl implements ArticleService {
         return null;
     }
 
-    @Override
+@Override
     public List<ArticleDTO> getArticlesByAuthor(Long authorId) {
-        Response response = webTarget.path("author/{authorId}")
-                .resolveTemplate("authorId", authorId)
+        //"/rest/api/v1/article?author={author}"
+        Response response = webTarget.queryParam("author", authorId)
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         if (response.getStatus() == 200) {
@@ -75,11 +74,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
     
     @Override
-    public ArticleDTO getArticleByAuthorAndTopics(Long authorId, String topic) {
-        Response response = webTarget.path("author/{authorId}/topics")
-                .resolveTemplate("authorId", authorId)
+    public ArticleDTO getArticleByAuthorAndTopics(Long authorId, List<String> topicNames) {
+        // Cambié la ruta a "/rest/api/v1/article?topic={topic1}&author={author}"
+        Response response = webTarget.queryParam("author", authorId) // Usando queryParam para autor
+                .queryParam("topic", topicNames) // Usando queryParam para temas
                 .request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(topic, MediaType.APPLICATION_JSON));
+                .get();
         if (response.getStatus() == 200) {
             return response.readEntity(ArticleDTO.class);
         }
