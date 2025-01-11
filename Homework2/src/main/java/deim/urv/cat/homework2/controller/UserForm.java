@@ -16,38 +16,38 @@ public class UserForm implements Serializable {
         
     // JSR 303 validation
     @NotBlank
-    @FormParam("firstName")
+    @FormParam("name")
     @MvcBinding
-    @Size(min=2, max=30, message = "First name must be between 2 and 30 characters")
-    private String firstName;
+    @Size(min=2, max=30, message = "name must be between 2 and 30 characters")
+    private String name;
     
-    // JSR 303 validation
+    
     @NotBlank
-    @FormParam("lastName")
     @MvcBinding
-    @Size(min=2, max=30, message = "Last name must be between 2 and 30 characters")
-    private String lastName;
+    @FormParam("password")
+    private String password;
 
     @NotBlank
     @FormParam("email")
     @Email(message = "Email should be valid")
     @MvcBinding
     private String email;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
-    public String getFirstName() {
-        return fixNull(this.firstName);
+    
+    public String getName() {
+        return fixNull(this.name);
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return fixNull(this.lastName);
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -61,4 +61,11 @@ public class UserForm implements Serializable {
     private String fixNull(String in) {
         return (in == null) ? "" : in;
     }
+
+    @Override
+    public String toString() {
+        return "UserForm{" + "firstName=" + name + ", password=" + password + ", email=" + email + '}';
+    }
+    
+   
 }

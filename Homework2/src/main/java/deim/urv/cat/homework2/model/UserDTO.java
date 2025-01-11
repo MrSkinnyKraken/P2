@@ -13,44 +13,24 @@ public class UserDTO implements Serializable{
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    
+
+
     private String email;
 
     private String name;
 
     private String password;
-    
-    private String apiKey;
-    
-    private List<ArticleDTO> articles;
-    
-    private List<CredentialsDTO> credentials;
 
-    public List<CredentialsDTO> getCredentials() {
-        return credentials;
-    }
-
-    public void setCredentials(List<CredentialsDTO> credentials) {
-        this.credentials = credentials;
-    }
+    private LinkDTO links = new LinkDTO();
 
     // Constructors
     public UserDTO() {
     }
 
-    public UserDTO(String email, String name, String password, String apiKey) {
+    public UserDTO(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;
-        this.apiKey = apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
-    public String getApiKey() {
-        return apiKey;
     }
 
     // Getters and Setters
@@ -86,11 +66,20 @@ public class UserDTO implements Serializable{
         this.password = password;
     }
 
-    public List<ArticleDTO> getArticles() {
-        return articles;
+    public LinkDTO getLinks() {
+        return links;
     }
 
-    public void setArticles(List<ArticleDTO> articles) {
-        this.articles = articles;
+       // Method to set the last article link
+    public void setLastArticleLink(String articleId) {
+        if (links == null){
+            links = new LinkDTO();
+        }
+        if (articleId != null && !articleId.isEmpty()) {
+            this.links.setArticle("/article/" + articleId);
+        } else {
+            this.links.setArticle(null); // No article available
+        }
     }
 }
+
