@@ -1,7 +1,7 @@
 package deim.urv.cat.homework2.controller;
 
 import deim.urv.cat.homework2.model.*;
-import deim.urv.cat.homework2.service.ArticleService;
+import deim.urv.cat.homework2.service.*;
 
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 @Path("articles")
 public class ArticleController {
     @Inject
-    private ArticleService articleService;
+    private ArticleServiceImpl articleService;
     @Inject
     private Models models;
     @Inject
@@ -25,7 +25,8 @@ public class ArticleController {
     @GET
     public String getAllArticles() {
         try {
-            List<ArticleDTO> articles = articleService.getAllArticles();
+            List<ArticleDTO> articles = articleService.getAllArticles(); //TODO: articles is null so it never shows anything
+            //log.log(Level.INFO, "Retrieved articles"+articles.size());
             models.put("articles", articles);
             return "listArticles.jsp"; // JSP to display the list of articles
         } catch (NumberFormatException e) {
