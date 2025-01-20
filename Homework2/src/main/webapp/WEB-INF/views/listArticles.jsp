@@ -27,7 +27,7 @@
                     <h3 class="panel-title">Filter Articles</h3>
                 </div>
                 <div class="panel-body">
-                    <form method="GET" action="${pageContext.request.contextPath}/Web/Articles">
+                    <form method="GET" action="${pageContext.request.contextPath}/Web/articles">
                         <div class="row">
                             <!-- Topics Dropdown -->
                             <div class="col-md-6">

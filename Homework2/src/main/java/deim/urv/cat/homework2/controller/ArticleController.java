@@ -29,7 +29,6 @@ public class ArticleController {
     public String getAllArticles() {
         try {
             List<ArticleDTO> articles = articleService.getAllArticles(); //TODO: articles is null so it never shows anything
-            //log.log(Level.INFO, "Retrieved articles"+articles.size());
             models.put("articles", articles);
             return "listArticles.jsp"; // JSP to display the list of articles
         } catch (NumberFormatException e) {
@@ -87,8 +86,7 @@ public class ArticleController {
         // Fetch all unique topics and authors for dropdowns
         List<String> topics = articleService.getAllTopics();
         List<UserDTO> authors = articleService.getAllAuthors();
-        log.log(Level.INFO, "articles retrieved:"+topics);
-
+        
         List<ArticleDTO> articles;
         if (topic != null && author != null){
             articles = articleService.getArticleByAuthorAndTopics(author, List.of(topic));
@@ -103,7 +101,7 @@ public class ArticleController {
         models.put("topics", topics);
         models.put("authors", authors);
         models.put("articles", articles);
-        return "listArticles.jps";
+        return "listArticles.jsp";
     }
 
 }

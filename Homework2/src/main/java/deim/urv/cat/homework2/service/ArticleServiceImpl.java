@@ -111,7 +111,6 @@ public class ArticleServiceImpl implements ArticleService {
         Response response = webTarget.path("topics")
                 .request(MediaType.APPLICATION_JSON)
                 .get();
-
         if (response.getStatus() == 200) {
             // Parse and return the list of topics
             return response.readEntity(new GenericType<List<String>>() {

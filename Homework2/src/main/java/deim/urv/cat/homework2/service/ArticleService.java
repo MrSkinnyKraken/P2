@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author arnau &rafa
+ * @author arnau & rafa
  */
 public interface ArticleService {
     public List<ArticleDTO> getAllArticles();
