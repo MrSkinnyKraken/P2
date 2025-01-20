@@ -15,9 +15,11 @@ import java.util.logging.Logger;
 @Controller
 @Path("articles")
 public class ArticleController {
-    
+
     @Inject
     private ArticleServiceImpl articleService;
+    @Inject
+    private UserServiceImpl userService;
     @Inject
     private Models models;
     @Inject
@@ -61,7 +63,7 @@ public class ArticleController {
     @GET
     @Path("/filter")
     public String getArticlesByFilter(@QueryParam("topic") List<String> topicNames,
-                                      @QueryParam("author") String author) {
+            @QueryParam("author") String author) {
         try {
             log.log(Level.INFO, "Fetching articles with filter: topic={0} author={1}", new Object[]{topicNames, author});
             List<ArticleDTO> articles = articleService.getArticlesByTopic(topicNames);
@@ -77,5 +79,30 @@ public class ArticleController {
         }
     }
 
+    @GET
+    @Path("/Web/Articles")
+    public String listArticles(
+            @QueryParam("topic") String topic,
+            @QueryParam("id") Long author) {
+        // Fetch all unique topics and authors for dropdowns
+        List<String> topics = articleService.getAllTopics();
+        List<UserDTO> authors = articleService.getAllAuthors();
+
+        List<ArticleDTO> articles;
+        if (topic != null && author != null){
+            articles = articleService.getArticleByAuthorAndTopics(author, List.of(topic));
+        }else if (topic != null) {
+            articles = articleService.getArticlesByTopic(List.of(topic));
+        } else if (author != null) {
+            articles = articleService.getArticlesByAuthor(author);
+        } else {
+            articles = articleService.getAllArticles();
+        }
+
+        models.put("topics", topics);
+        models.put("authors", authors);
+        models.put("articles", articles);
+        return "listArticles.jps";
+    }
 
 }
