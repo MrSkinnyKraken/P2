@@ -22,7 +22,7 @@
             <h2 class="text-center">Welcome to the Articles Page</h2>
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <div class="panel-title">Available Articles</div>
+                    <div class="panel-title">Articles</div>
                 </div>
                 <div class="panel-body">
 
