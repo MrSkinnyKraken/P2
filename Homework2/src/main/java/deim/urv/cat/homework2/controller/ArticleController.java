@@ -87,6 +87,7 @@ public class ArticleController {
         // Fetch all unique topics and authors for dropdowns
         List<String> topics = articleService.getAllTopics();
         List<UserDTO> authors = articleService.getAllAuthors();
+        log.log(Level.INFO, "articles retrieved:"+topics);
 
         List<ArticleDTO> articles;
         if (topic != null && author != null){
