@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 @Controller
 @Path("articles")
 public class ArticleController {
+    
     @Inject
     private ArticleServiceImpl articleService;
     @Inject
