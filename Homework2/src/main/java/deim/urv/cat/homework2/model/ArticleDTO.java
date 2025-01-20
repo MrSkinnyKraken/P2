@@ -48,6 +48,14 @@ public class ArticleDTO implements Serializable{
         this.publishedDate = LocalDateTime.now();
         this.views = 0; // Default views
     }
+
+    @Override
+    public String toString() {
+        return "ArticleDTO{" + "id=" + id + ", title=" + title + ", summary=" + summary + ", fullText=" + fullText + ", views=" + views + ", author=" + author + ", publishedDate=" + publishedDate + ", topics=" + topics + ", isPrivate=" + isPrivate + ", image=" + image + '}';
+    }
+    
+    
+    
     //Getters
     public Long getId() {
         return id;

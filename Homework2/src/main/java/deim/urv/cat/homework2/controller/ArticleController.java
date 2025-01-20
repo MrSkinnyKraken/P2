@@ -1,7 +1,7 @@
 package deim.urv.cat.homework2.controller;
 
 import deim.urv.cat.homework2.model.*;
-import deim.urv.cat.homework2.service.ArticleService;
+import deim.urv.cat.homework2.service.*;
 
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
@@ -15,8 +15,9 @@ import java.util.logging.Logger;
 @Controller
 @Path("articles")
 public class ArticleController {
+    
     @Inject
-    private ArticleService articleService;
+    private ArticleServiceImpl articleService;
     @Inject
     private Models models;
     @Inject
