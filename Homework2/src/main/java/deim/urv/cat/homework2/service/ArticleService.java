@@ -16,8 +16,8 @@ public interface ArticleService {
     public List<ArticleDTO> getAllArticles();
     public ArticleDTO getArticleById(Long id);
     public List<ArticleDTO> getArticlesByTopic(List<String> topicNames);
-    public List<ArticleDTO> getArticlesByAuthor(Long authorId);
-    public List<ArticleDTO> getArticleByAuthorAndTopics(Long authorId, List<String> topicNames);
+    public List<ArticleDTO> getArticlesByAuthor(String author);
+    public List<ArticleDTO> getArticleByAuthorAndTopics(String author, List<String> topicNames);
     public List<String> getAllTopics();
     public List<UserDTO> getAllAuthors();
     public void close();

@@ -26,19 +26,6 @@ public class ArticleController {
     private Logger log;
 
     @GET
-    public String getAllArticles() {
-        try {
-            List<ArticleDTO> articles = articleService.getAllArticles(); //TODO: articles is null so it never shows anything
-            models.put("articles", articles);
-            return "listArticles.jsp"; // JSP to display the list of articles
-        } catch (NumberFormatException e) {
-            log.log(Level.WARNING, "Error fetching articles: {0}", e.getMessage());
-            models.put("error", "Failed to fetch articles");
-            return "Error404.jsp";
-        }
-    }
-
-    @GET
     @Path("/{id}")
     public String getArticleById(@PathParam("id") Long id) {
         try {
@@ -59,39 +46,20 @@ public class ArticleController {
         }
     }
 
+    
     @GET
-    @Path("/filter")
-    public String getArticlesByFilter(@QueryParam("topic") List<String> topicNames,
-            @QueryParam("author") String author) {
-        try {
-            log.log(Level.INFO, "Fetching articles with filter: topic={0} author={1}", new Object[]{topicNames, author});
-            List<ArticleDTO> articles = articleService.getArticlesByTopic(topicNames);
-            if (author != null && !author.isEmpty()) {
-                articles = articleService.getArticlesByAuthor(Long.valueOf(author));
-            }
-            models.put("articles", articles);
-            return "listArticles.jsp"; // JSP to display filtered articles
-        } catch (NumberFormatException e) {
-            log.log(Level.WARNING, "Error fetching articles with filter: {0}", e.getMessage());
-            models.put("error", "Failed to fetch articles with filter");
-            return "error.jsp";
-        }
-    }
-
-    @GET
-    @Path("/Web/Articles")
     public String listArticles(
-            @QueryParam("topic") String topic,
-            @QueryParam("id") Long author) {
+            @QueryParam("topic") List<String> topic,
+            @QueryParam("author") String author) {
         // Fetch all unique topics and authors for dropdowns
         List<String> topics = articleService.getAllTopics();
         List<UserDTO> authors = articleService.getAllAuthors();
         
         List<ArticleDTO> articles;
-        if (topic != null && author != null){
-            articles = articleService.getArticleByAuthorAndTopics(author, List.of(topic));
-        }else if (topic != null) {
-            articles = articleService.getArticlesByTopic(List.of(topic));
+        if (topic !=null && !topic.isEmpty() && author!=null){
+            articles = articleService.getArticleByAuthorAndTopics(author, topic);
+        }else if (topic !=null && !topic.isEmpty()) {
+            articles = articleService.getArticlesByTopic(topic);
         } else if (author != null) {
             articles = articleService.getArticlesByAuthor(author);
         } else {

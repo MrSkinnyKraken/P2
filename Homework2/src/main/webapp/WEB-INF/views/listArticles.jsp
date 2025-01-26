@@ -27,7 +27,7 @@
                     <h3 class="panel-title">Filter Articles</h3>
                 </div>
                 <div class="panel-body">
-                    <form method="GET" action="${pageContext.request.contextPath}/Web/articles">
+                    <form id="filterForm" method="GET" action="${pageContext.request.contextPath}/Web/articles">
                         <div class="row">
                             <!-- Topics Dropdown -->
                             <div class="col-md-6">
@@ -46,7 +46,7 @@
                                 <select id="author" name="author" class="form-control">
                                     <option value="">-- All Authors --</option>
                                     <c:forEach var="author" items="${authors}">
-                                        <option value="${author.id}">${author.name}</option>
+                                        <option value="${author.name}">${author.name}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -57,6 +57,22 @@
                             </div>
                         </div>
                     </form>
+
+                    <script>
+                        document.getElementById('filterForm').addEventListener('submit', function (event) {
+                            // Obtener todos los elementos del formulario
+                            const form = event.target;
+                            const elements = form.elements;
+
+                            // Eliminar parámetros vacíos
+                            Array.from(elements).forEach(element => {
+                                if (element.name && element.value === '') {
+                                    element.name = ''; // Evitar que se envíe el parámetro vacío
+                                }
+                            });
+                        });
+                    </script>
+
                 </div>
             </div>
             

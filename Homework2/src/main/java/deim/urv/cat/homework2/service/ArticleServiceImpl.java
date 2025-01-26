@@ -54,21 +54,26 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public List<ArticleDTO> getArticlesByTopic(List<String> topicNames) {
-        // "/rest/api/v1/article?topic={topic1}&author={author}"
+        // "/rest/api/v1/article?topic={topic1}"
         Response response = webTarget.queryParam("topic", topicNames)
                 .request(MediaType.APPLICATION_JSON)
                 .get();
+        System.err.println(webTarget.queryParam("topic", topicNames));
         if (response.getStatus() == 200) {
             return response.readEntity(new GenericType<List<ArticleDTO>>() {
             });
         }
-        return null;
+        else{
+            System.err.println("Error: " + response.getStatus() + " - " + response.getStatusInfo());
+            return null;
+        }
+
     }
 
     @Override
-    public List<ArticleDTO> getArticlesByAuthor(Long authorId) {
+    public List<ArticleDTO> getArticlesByAuthor(String author) {
         //"/rest/api/v1/article?author={author}"
-        Response response = webTarget.queryParam("author", authorId)
+        Response response = webTarget.queryParam("author", author)
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         if (response.getStatus() == 200) {
@@ -79,11 +84,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<ArticleDTO> getArticleByAuthorAndTopics(Long authorId, List<String> topicNames) {
+    public List<ArticleDTO> getArticleByAuthorAndTopics(String author, List<String> topicNames) {
         // Add query parameters for author and topics
         WebTarget target = webTarget;
-        if (authorId != null) {
-            target = target.queryParam("author", authorId);
+        if (author != null) {
+            target = target.queryParam("author", author);
         }
         if (topicNames != null && !topicNames.isEmpty()) {
             target = target.queryParam("topic", topicNames);
@@ -125,8 +130,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<UserDTO> getAllAuthors() {
         // Make a GET request to "/rest/api/v1/article/authors"
-        WebTarget userWebTarget = client.target(BASE_URI).path("authors");
-        Response response = userWebTarget
+        Response response = webTarget.path("authors")
                 .request(MediaType.APPLICATION_JSON)
                 .get();
 
