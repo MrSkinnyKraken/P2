@@ -76,6 +76,6 @@ public class SignUpFormController {
         }
         attempts.reset();
         log.log(Level.INFO, "Redirecting to the success page.");
-        return "signup-success.jsp";
+        return "listArticles.jsp";
     } 
 }

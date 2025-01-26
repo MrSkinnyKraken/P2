@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Articles List</title>
+    <title>TecnoArticles</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" />
     <script src="<c:url value='/resources/js/jquery-1.11.1.min.js' />"></script>
@@ -18,10 +18,26 @@
           crossorigin="anonymous"/>
 </head>
 <body>
-    <div class="container">
-        <div class="col-md-offset-2 col-md-8">
-            <h2 class="text-center">Welcome to the Articles Page</h2>
-            
+    <div class="container-fluid"> 
+        <div class="col-md-12"> 
+            <h2 class="text-center">TecnoArticles </h2>
+
+                        <!-- User Options -->
+            <div class="user-options panel panel-primary col-md-2" width="auto">
+                <div class="panel-heading">
+                    <h3 class="panel-title">User Options</h3>
+                </div>
+                <!-- Menú de opciones de usuario -->
+                <div class="user-menu">
+                    <button class="menu-toggle">User Options</button>
+                    <div class="menu-content">
+                        <a href="${pageContext.request.contextPath}/Web/LogIn" class="menu-item">LogIn</a>
+                        <a href="${pageContext.request.contextPath}/Web/SignUp" class="menu-item">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+
+
             <!-- Filter Section -->
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -93,24 +109,5 @@
             </div>
         </div>
     </div>
-
-    <!-- Script to allow only one author selection -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const authorCheckboxes = document.querySelectorAll(".author-checkbox");
-
-            authorCheckboxes.forEach(checkbox => {
-                checkbox.addEventListener("change", function () {
-                    if (this.checked) {
-                        authorCheckboxes.forEach(cb => {
-                            if (cb !== this) {
-                                cb.checked = false;
-                            }
-                        });
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

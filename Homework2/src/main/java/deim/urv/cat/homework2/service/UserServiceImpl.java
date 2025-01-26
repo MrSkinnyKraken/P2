@@ -2,6 +2,7 @@ package deim.urv.cat.homework2.service;
 
 import deim.urv.cat.homework2.model.UserDTO;
 import deim.urv.cat.homework2.controller.UserForm;
+import deim.urv.cat.homework2.model.CredentialsDTO;
 import jakarta.ws.rs.client.WebTarget;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.MediaType;
@@ -61,6 +62,36 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             // Cualquier otro error inesperado
             System.err.println("Ocurrió un error inesperado: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    
+    @Override
+    public boolean checkPassword(String name, String password) {
+        // Crear un objeto de Credenciales con el email y la contraseña
+        CredentialsDTO credentials = new CredentialsDTO();
+        credentials.setUsername(name);
+        credentials.setPassword(password);
+
+        try {
+            // Enviar la solicitud POST con las credenciales
+            Response response = webTarget.path("auth")
+                    .request(MediaType.APPLICATION_JSON)
+                    .post(Entity.entity(credentials, MediaType.APPLICATION_JSON));
+
+            // Verificar el estado de la respuesta
+            if (response.getStatus() == 200) {
+                return true; // Autenticación exitosa
+            } else {
+                // Si el estado es diferente de 200, la autenticación falló
+                System.err.println("Autenticación fallida. Código de estado: " + response.getStatus());
+                return false;
+            }
+        } catch (Exception e) {
+            // Manejar cualquier error
+            System.err.println("Error al autenticar al usuario: " + e.getMessage());
             e.printStackTrace();
             return false;
         }

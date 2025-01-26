@@ -7,4 +7,5 @@ public interface UserService {
     
     public UserDTO findUserByEmail(String email);
     public boolean addUser(UserForm user);
+    public boolean checkPassword(String email, String password);
 }

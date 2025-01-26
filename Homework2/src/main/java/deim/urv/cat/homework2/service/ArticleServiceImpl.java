@@ -81,7 +81,6 @@ public class ArticleServiceImpl implements ArticleService {
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         if (response.getStatus() == 200) {
-            System.err.println("AAAAAAAAAAAAAAA AUTORES: "+response.toString()); 
             return response.readEntity(new GenericType<List<ArticleDTO>>() {
             });
         }
