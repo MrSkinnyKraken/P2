@@ -55,20 +55,24 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<ArticleDTO> getArticlesByTopic(List<String> topicNames) {
         // "/rest/api/v1/article?topic={topic1}"
-        Response response = webTarget.queryParam("topic", topicNames)
+
+        WebTarget target = webTarget;
+        if (topicNames != null && !topicNames.isEmpty()) {
+            for (String topic : topicNames) {
+                target = target.queryParam("topic", topic);
+            }
+        }
+        Response response = target
                 .request(MediaType.APPLICATION_JSON)
                 .get();
-        System.err.println(webTarget.queryParam("topic", topicNames));
         if (response.getStatus() == 200) {
-            return response.readEntity(new GenericType<List<ArticleDTO>>() {
-            });
-        }
-        else{
+            return response.readEntity(new GenericType<List<ArticleDTO>>() {});
+        } else {
             System.err.println("Error: " + response.getStatus() + " - " + response.getStatusInfo());
             return null;
         }
-
     }
+
 
     @Override
     public List<ArticleDTO> getArticlesByAuthor(String author) {
@@ -77,6 +81,7 @@ public class ArticleServiceImpl implements ArticleService {
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         if (response.getStatus() == 200) {
+            System.err.println("AAAAAAAAAAAAAAA AUTORES: "+response.toString()); 
             return response.readEntity(new GenericType<List<ArticleDTO>>() {
             });
         }
@@ -91,7 +96,9 @@ public class ArticleServiceImpl implements ArticleService {
             target = target.queryParam("author", author);
         }
         if (topicNames != null && !topicNames.isEmpty()) {
-            target = target.queryParam("topic", topicNames);
+            for (String topic : topicNames) {
+                target = target.queryParam("topic", topic);
+            }
         }
 
         // Make the GET request

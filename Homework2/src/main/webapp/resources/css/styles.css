@@ -1,0 +1,87 @@
+
+/**
+ *
+ * @author arnau & rafa
+ */
+
+
+/* Fondo oscuro de la página */
+body {
+    background-color: #121212;
+    color: #f5f5f5;
+}
+
+/* Estilos del panel */
+.panel-primary {
+    border-color: #444;
+    background-color: #333;
+}
+
+.panel-primary .panel-heading {
+    background-color: #444;
+    border-color: #444;
+    color: #fff;
+}
+
+/* Botones */
+.btn-primary .btn-info{
+    background-color: #0066cc;
+    border-color: #004999;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #005bb5;
+}
+
+/* Dropdowns de filtros */
+.filter-dropdown {
+    text-align: center;
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.filter-dropdown:hover .dropdown-content {
+    display: block;
+    width: 60%;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #222;
+    color: #fff;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    z-index: 1;
+    min-width: calc(1.25 * 100%);
+}
+
+.dropdown-content label {
+    display: block;
+}
+
+.dropdown-content input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Estilos de los artículos */
+.article-item {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    color: #f5f5f5;
+}
+
+.article-item a {
+    color: #66ccff;
+}
+
+.article-item a:hover {
+    color: #3399ff;
+}
+
+/* Fuente y espaciado general */
+.panel-body {
+    font-size: 1.1em;
+}

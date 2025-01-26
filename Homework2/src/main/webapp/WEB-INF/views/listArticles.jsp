@@ -6,10 +6,11 @@
 <head>
     <title>Articles List</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" />
     <script src="<c:url value='/resources/js/jquery-1.11.1.min.js' />"></script>
     <script src="<c:url value='/resources/js/bootstrap.min.js' />"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
+    
     <!-- FontAwesome -->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           rel="stylesheet"
@@ -29,26 +30,32 @@
                 <div class="panel-body">
                     <form id="filterForm" method="GET" action="${pageContext.request.contextPath}/Web/articles">
                         <div class="row">
-                            <!-- Topics Dropdown -->
+                            <!-- Topics Checkbox -->
                             <div class="col-md-6">
-                                <label for="topic">Select Topic</label>
-                                <select id="topic" name="topic" class="form-control">
-                                    <option value="">-- All Topics --</option>
-                                    <c:forEach var="topic" items="${topics}">
-                                        <option value="${topic}">${topic}</option>
-                                    </c:forEach>
-                                </select>
+                                <div class="filter-dropdown">
+                                    <label>Topics</label>
+                                    <div class="dropdown-content">
+                                        <c:forEach var="topic" items="${topics}">
+                                            <label>
+                                                <input type="checkbox" name="topic" value="${topic}"> ${topic}
+                                            </label>
+                                        </c:forEach>
+                                    </div>
+                                </div>
                             </div>
 
-                            <!-- Authors Dropdown -->
+                            <!-- Authors Checkbox (Single Selection) -->
                             <div class="col-md-6">
-                                <label for="author">Select Author</label>
-                                <select id="author" name="author" class="form-control">
-                                    <option value="">-- All Authors --</option>
-                                    <c:forEach var="author" items="${authors}">
-                                        <option value="${author.name}">${author.name}</option>
-                                    </c:forEach>
-                                </select>
+                                <div class="filter-dropdown">
+                                    <label>Authors</label>
+                                    <div class="dropdown-content">
+                                        <c:forEach var="author" items="${authors}">
+                                            <label>
+                                                <input type="checkbox" name="author" value="${author.name}" class="author-checkbox"> ${author.name}
+                                            </label>
+                                        </c:forEach>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-3">
@@ -57,22 +64,6 @@
                             </div>
                         </div>
                     </form>
-
-                    <script>
-                        document.getElementById('filterForm').addEventListener('submit', function (event) {
-                            // Obtener todos los elementos del formulario
-                            const form = event.target;
-                            const elements = form.elements;
-
-                            // Eliminar parámetros vacíos
-                            Array.from(elements).forEach(element => {
-                                if (element.name && element.value === '') {
-                                    element.name = ''; // Evitar que se envíe el parámetro vacío
-                                }
-                            });
-                        });
-                    </script>
-
                 </div>
             </div>
             
@@ -100,17 +91,26 @@
                     </div>
                 </c:forEach>
             </div>
-            
-            <!-- Pagination Controls -->
-            <div class="text-center mt-4">
-                <c:if test="${pageNumber > 1}">
-                    <a href="${mvc.uri('articles')}&page=${pageNumber - 1}" class="btn btn-secondary">Previous</a>
-                </c:if>
-                <c:if test="${pageNumber < totalPages}">
-                    <a href="${mvc.uri('articles')}&page=${pageNumber + 1}" class="btn btn-secondary">Next</a>
-                </c:if>
-            </div>
         </div>
     </div>
+
+    <!-- Script to allow only one author selection -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const authorCheckboxes = document.querySelectorAll(".author-checkbox");
+
+            authorCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", function () {
+                    if (this.checked) {
+                        authorCheckboxes.forEach(cb => {
+                            if (cb !== this) {
+                                cb.checked = false;
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
