@@ -24,10 +24,10 @@ body {
 }
 
 /* Botones */
-.btn-primary .btn-info{
-    background-color: #0066cc;
+.btn-primary {
+    background-color: #337ab7;
     border-color: #004999;
-    color: #fff;
+    
 }
 
 .btn-primary:hover {
@@ -44,18 +44,18 @@ body {
 
 .filter-dropdown:hover .dropdown-content {
     display: block;
-    width: 60%;
-}
+    left: 0.75%;
+   }
 
 .dropdown-content {
+    margin-left: 22%;
     display: none;
     position: absolute;
     background-color: #222;
     color: #fff;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
     padding: 10px;
     z-index: 1;
-    min-width: calc(1.25 * 100%);
+    min-width: calc(0.5 * 100%);
 }
 
 .dropdown-content label {
@@ -74,11 +74,7 @@ body {
 }
 
 .article-item a {
-    color: #66ccff;
-}
-
-.article-item a:hover {
-    color: #3399ff;
+    color: #fff;
 }
 
 /* Fuente y espaciado general */
