@@ -67,7 +67,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    
     @Override
     public boolean checkPassword(String name, String password) {
         // Crear un objeto de Credenciales con el email y la contraseña
@@ -96,6 +95,31 @@ public class UserServiceImpl implements UserService {
             return false;
         }
     }
-    
+
+    @Override
+    public UserDTO getUserById(Long id) {
+        try {
+            // Call the REST API with the provided ID
+            Response response = webTarget.path(String.valueOf(id))
+                    .request(MediaType.APPLICATION_JSON)
+                    .get();
+
+            // Check if the response is successful
+            if (response.getStatus() == 200) {
+                // Convert the response to UserDTO
+                return response.readEntity(UserDTO.class);
+            } else {
+                // Log error and return null for non-200 responses
+                System.err.println("Failed to fetch user with ID: " + id
+                        + ". Status: " + response.getStatus());
+                return null;
+            }
+        } catch (Exception e) {
+            // Handle unexpected exceptions
+            System.err.println("Error fetching user with ID: " + id);
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }

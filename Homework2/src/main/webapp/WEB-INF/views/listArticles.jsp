@@ -30,8 +30,8 @@
                             <div class="col-md-12">
                             <c:choose>
                                 <c:when test="${not empty sessionScope.loggedInUser}">
-                                    <p>Welcome, ${sessionScope.loggedInUser.name}!</p>
-                                    <a href="${pageContext.request.contextPath}/Web/UserInfo" class="menu-item">User Info</a>
+                                    <p>Welcome, <a href="${pageContext.request.contextPath}/Web/users/${sessionScope.loggedInUser.id}">${sessionScope.loggedInUser.name}</a>!</p>
+                                    <!-- <a href="${pageContext.request.contextPath}/Web/UserInfo" class="menu-item">User Info</a> -->
                                     <a href="${pageContext.request.contextPath}/Web/Logout" class="menu-item">Log Out</a>
                                 </c:when>
                                 <c:otherwise>
