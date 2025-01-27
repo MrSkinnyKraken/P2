@@ -22,6 +22,7 @@ body {
     color: #fff;
     font-size: 1.2em;
     font-weight: bold;
+    height: auto;
 }
 
 /* Botones */
@@ -94,74 +95,23 @@ body {
 }
 
 /* Ajustes para el menú de usuario */
-.user-menu {
+.user-menu{
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.user-options {
+    display: none;
     position: absolute;
     top: 10px;
     right: 10px;
     z-index: 1000;
-}
-
-/* Botón para activar el menú */
-.menu-toggle {
-    background-color: #337ab7;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-.menu-toggle:hover {
-    background-color: #005bb5;
-}
-
-/* Contenido del menú */
-.menu-content {
-    display: none; /* Oculto por defecto */
-    position: absolute;
-    top: 100%; /* Justo debajo del botón */
-    right: 0;
     background-color: #222;
-    border: 1px solid #444;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    min-width: 150px;
-    text-align: center;
-
-}
-
-/* Elementos del menú */
-.menu-content .menu-item {
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    padding: 5px 0;
-    transition: background-color 0.3s ease;
-}
-
-.menu-content .menu-item:hover {
-    background-color: #444;
-}
-
-/* Mostrar el menú al pasar el ratón */
-.user-menu:hover .menu-content {
-    display: inline-block;
-}
-
-/* Estilos para las opciones de usuario (botones dentro del panel) */
-.user-options {
-    position: relative;
-    display: inline-block;
-    top: 0.5%;
-    right: 10px;
-    border-radius: 5px;
     padding: 10px;
 }
 
-.user-options .btn {
+.user-options:hover .btn {
     display: block;
     width: 100%;
     margin-bottom: 10px;

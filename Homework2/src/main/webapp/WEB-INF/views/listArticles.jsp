@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>TecnoArticles</title>
+    <title>Articles List</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styles.css" />
     <script src="<c:url value='/resources/js/jquery-1.11.1.min.js' />"></script>
@@ -18,31 +18,29 @@
           crossorigin="anonymous"/>
 </head>
 <body>
-    <div class="container-fluid"> 
-        <div class="col-md-12"> 
-            <h2 class="text-center">TecnoArticles </h2>
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <h2 class="text-center">Welcome to the Articles Page</h2>
 
-                        <!-- User Options -->
-            <div class="user-options panel panel-primary col-md-2" width="auto">
+            <!-- User Options -->
+            <div class="user-menu panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">User Options</h3>
-                </div>
-                <!-- Menú de opciones de usuario -->
-                <div class="user-menu">
-                    <button class="menu-toggle">User Options</button>
-                    <div class="menu-content">
-                        <c:choose>
-                            <c:when test="${not empty sessionScope.loggedInUser}">
-                                <p>Welcome, ${sessionScope.loggedInUser.name}!</p>
-                                <a href="" class="menu-item">User Info</a>
-                                <a href="${pageContext.request.contextPath}/Web/Logout" class="menu-item">Log Out</a>
-                            </c:when>
-                            <c:otherwise>
-                                <a href="${pageContext.request.contextPath}/Web/LogIn" class="menu-item">Log In</a>
-                                <a href="${pageContext.request.contextPath}/Web/SignUp" class="menu-item">Sign Up</a>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
+                        <div class="row user-options">
+                            <div class="col-md-12">
+                            <c:choose>
+                                <c:when test="${not empty sessionScope.loggedInUser}">
+                                    <p>Welcome, ${sessionScope.loggedInUser.name}!</p>
+                                    <a href="${pageContext.request.contextPath}/Web/UserInfo" class="menu-item">User Info</a>
+                                    <a href="${pageContext.request.contextPath}/Web/Logout" class="menu-item">Log Out</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="${pageContext.request.contextPath}/Web/LogIn" class="menu-item">Log In</a>
+                                    <a href="${pageContext.request.contextPath}/Web/SignUp" class="menu-item">Sign Up</a>
+                                </c:otherwise>
+                            </c:choose>
+                            </div>
+                        </div>
                 </div>
             </div>
 
