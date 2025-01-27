@@ -70,6 +70,10 @@ body {
     margin-right: 5px;
 }
 
+.panel-primary .panel-heading:hover .row.user-options {
+    display: block; /* Make the user-options visible */
+}
+
 /* Estilos de los artículos */
 .article-item {
     background-color: #1e1e1e;
@@ -133,4 +137,15 @@ body {
 
 .user-options .btn-secondary:hover {
     background-color: #36a2c8;
+}
+
+.row.user-options {
+    display: none; /* Initially hidden */
+    position: absolute; /* Adjust position to avoid layout shifts */
+    z-index: 1000; /* Ensure it appears above other elements */
+    background-color: #222; /* Match the panel styling */
+    color: #fff; /* Text color */
+    padding: 10px; /* Padding for better spacing */
+    border-radius: 5px; /* Rounded corners for better appearance */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
 }

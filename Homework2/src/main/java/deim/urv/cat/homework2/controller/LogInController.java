@@ -8,6 +8,7 @@ package deim.urv.cat.homework2.controller;
 import deim.urv.cat.homework2.model.AlertMessage;
 import deim.urv.cat.homework2.model.SignUpAttempts;
 import deim.urv.cat.homework2.model.UserDTO;
+import deim.urv.cat.homework2.service.ArticleServiceImpl;
 import deim.urv.cat.homework2.service.UserServiceImpl;
 
 import jakarta.inject.Inject;
@@ -37,6 +38,7 @@ public class LogInController {
     @Inject BindingResult bindingResult;
     @Inject Logger log;
     @Inject UserServiceImpl service;
+    @Inject ArticleServiceImpl service2;
     @Inject Models models;
     @Inject AlertMessage flashMessage;
     @Inject SignUpAttempts attempts;
@@ -89,6 +91,7 @@ public class LogInController {
         
         attempts.reset();
         log.log(Level.INFO, "User {0} successfully signed in.", LogInForm.getEmail());
+        models.put("articles", service2.getAllArticles());
         session.setAttribute("loggedInUser", user);
         return "listArticles.jsp"; // Página de éxito al iniciar sesión
     }

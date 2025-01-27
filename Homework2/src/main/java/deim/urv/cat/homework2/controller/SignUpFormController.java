@@ -4,6 +4,7 @@ import deim.urv.cat.homework2.model.AlertMessage;
 import deim.urv.cat.homework2.model.SignUpAttempts;
 import deim.urv.cat.homework2.service.UserService;
 import deim.urv.cat.homework2.model.UserDTO;
+import deim.urv.cat.homework2.service.ArticleServiceImpl;
 
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
@@ -29,6 +30,7 @@ public class SignUpFormController {
     @Inject BindingResult bindingResult;
     @Inject Logger log;
     @Inject UserService service;
+    @Inject ArticleServiceImpl service2;
     @Inject Models models;
     @Inject AlertMessage flashMessage;
     @Inject SignUpAttempts attempts;
@@ -36,6 +38,7 @@ public class SignUpFormController {
     
     @GET
     public String showForm() {
+        models.put("articles", service2.getAllArticles());
         return "signup-form.jsp"; // Injects CRSF token
     }    
     
@@ -79,7 +82,8 @@ public class SignUpFormController {
         attempts.reset();
         log.log(Level.INFO, "Redirecting to the success page.");
         
-        session.setAttribute("loggedInUser", user); //To keep the session alive
+        models.put("articles", service2.getAllArticles());
+        session.setAttribute("loggedInUser", service.findUserByEmail(userForm.getEmail())); //To keep the session alive
         return "listArticles.jsp";
     } 
 }
