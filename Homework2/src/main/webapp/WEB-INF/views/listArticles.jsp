@@ -31,12 +31,20 @@
                 <div class="user-menu">
                     <button class="menu-toggle">User Options</button>
                     <div class="menu-content">
-                        <a href="${pageContext.request.contextPath}/Web/LogIn" class="menu-item">LogIn</a>
-                        <a href="${pageContext.request.contextPath}/Web/SignUp" class="menu-item">Sign Up</a>
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.loggedInUser}">
+                                <p>Welcome, ${sessionScope.loggedInUser.name}!</p>
+                                <a href="" class="menu-item">User Info</a>
+                                <a href="${pageContext.request.contextPath}/Web/Logout" class="menu-item">Log Out</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="${pageContext.request.contextPath}/Web/LogIn" class="menu-item">Log In</a>
+                                <a href="${pageContext.request.contextPath}/Web/SignUp" class="menu-item">Sign Up</a>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
-
 
             <!-- Filter Section -->
             <div class="panel panel-primary">
