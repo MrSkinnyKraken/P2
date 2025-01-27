@@ -28,7 +28,9 @@
                 </div>
                 <div class="panel-body">
                     <form action="${mvc.uri('log-in')}" class="form-horizontal" method="POST">                        
-                       
+                       <!-- CSRF Token -->
+                        <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}" />
+                        
                         <!-- Email Field -->
                         <div class="form-group">
                             <label for="email" class="col-md-3 control-label">Email</label>

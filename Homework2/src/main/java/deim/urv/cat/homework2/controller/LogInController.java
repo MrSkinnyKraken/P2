@@ -17,6 +17,7 @@ import jakarta.mvc.UriRef;
 import jakarta.mvc.binding.BindingResult;
 import jakarta.mvc.binding.ParamError;
 import jakarta.mvc.security.CsrfProtected;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 
@@ -25,7 +26,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author rpino
+ * @author rpino & arnau
  */
 
 @Controller
@@ -39,7 +40,8 @@ public class LogInController {
     @Inject Models models;
     @Inject AlertMessage flashMessage;
     @Inject SignUpAttempts attempts;
-
+    @Inject HttpSession session;
+    
     @GET
     public String showForm() {
         return "login-form.jsp"; // Vista del formulario de inicio de sesión
@@ -87,6 +89,7 @@ public class LogInController {
         
         attempts.reset();
         log.log(Level.INFO, "User {0} successfully signed in.", LogInForm.getEmail());
+        session.setAttribute("loggedInUser", user);
         return "listArticles.jsp"; // Página de éxito al iniciar sesión
     }
 }

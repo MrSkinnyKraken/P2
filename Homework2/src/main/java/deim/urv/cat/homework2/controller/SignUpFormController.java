@@ -12,6 +12,7 @@ import jakarta.mvc.UriRef;
 import jakarta.mvc.binding.BindingResult;
 import jakarta.mvc.binding.ParamError;
 import jakarta.mvc.security.CsrfProtected;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.GET;
@@ -31,6 +32,7 @@ public class SignUpFormController {
     @Inject Models models;
     @Inject AlertMessage flashMessage;
     @Inject SignUpAttempts attempts;
+    @Inject HttpSession session;
     
     @GET
     public String showForm() {
@@ -76,6 +78,8 @@ public class SignUpFormController {
         }
         attempts.reset();
         log.log(Level.INFO, "Redirecting to the success page.");
+        
+        session.setAttribute("loggedInUser", user); //To keep the session alive
         return "listArticles.jsp";
     } 
 }
