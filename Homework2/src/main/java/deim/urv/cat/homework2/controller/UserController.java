@@ -4,6 +4,7 @@
  */
 package deim.urv.cat.homework2.controller;
 
+import deim.urv.cat.homework2.model.LinkDTO;
 import deim.urv.cat.homework2.model.UserDTO;
 import deim.urv.cat.homework2.service.UserServiceImpl;
 import jakarta.inject.Inject;
@@ -38,7 +39,7 @@ public class UserController {
             log.log(Level.INFO, "Fetching user with ID: {0}", id);
             // Use the service method to get the user data
             UserDTO user = userService.getUserById(id);
-
+            LinkDTO link = user.getLinks();
             if (user != null) {
                 // Add the user object to the model
                 models.put("user", user);
