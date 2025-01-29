@@ -63,7 +63,8 @@ public class ArticleServiceImpl implements ArticleService {
                 .get();
 
         if (response.getStatus() == 200) {
-            return response.readEntity(BigArticleDTO.class);
+            BigArticleDTO article = response.readEntity(BigArticleDTO.class);
+            return article;
         }
         return null;
     }

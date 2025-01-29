@@ -4,6 +4,7 @@
  */
 package deim.urv.cat.homework2.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,8 +12,7 @@ import java.util.List;
  *
  * @author arnau
  */
-public class BigArticleDTO {
-
+public class BigArticleDTO implements Serializable{
     private Long id;
     private String title;
     private UserDTO author;
@@ -22,19 +22,26 @@ public class BigArticleDTO {
     private String image;
     private List<TopicDTO> topics;
     private boolean isPrivate;
-
-    public BigArticleDTO(Long id, String title, UserDTO author, LocalDateTime publishedDate, int views, String fullText, String image, List<TopicDTO> topics, boolean isPrivate) {
+    
+    public BigArticleDTO(){
+    }
+    
+    public BigArticleDTO(Long id, String title, UserDTO author, LocalDateTime publishedDate, int views, String fullText, String img, List<TopicDTO> topics, boolean isPrivate) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.publishedDate = publishedDate;
         this.views = views;
         this.fullText = fullText;
-        this.image = image;
+        this.image = img;
         this.topics = topics;
         this.isPrivate = isPrivate;
     }
 
+    public boolean isIsPrivate() {
+        return isPrivate;
+    }
+//getter
     public Long getId() {
         return id;
     }
@@ -55,10 +62,6 @@ public class BigArticleDTO {
         return views;
     }
 
-    public boolean isIsPrivate() {
-        return isPrivate;
-    }
-
     public String getFullText() {
         return fullText;
     }
@@ -70,5 +73,41 @@ public class BigArticleDTO {
     public List<TopicDTO> getTopics() {
         return topics;
     }
+    
+//setter
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setAuthor(UserDTO author) {
+        this.author = author;
+    }
+
+    public void setPublishedDate(LocalDateTime publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+
+    public void setFullText(String fullText) {
+        this.fullText = fullText;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setTopics(List<TopicDTO> topics) {
+        this.topics = topics;
+    }
+    
+
+    
 }

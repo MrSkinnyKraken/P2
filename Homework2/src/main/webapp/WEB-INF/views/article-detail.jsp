@@ -26,7 +26,7 @@
     <body>
         <div class="container mt-5">
             <div class="card bg-dark text-white">
-                <img src="${pageContext.request.contextPath}/resources/img/${article.image}" class="card-img-top" alt="${article.title}">
+                <img src="${pageContext.request.contextPath}/resources/img/${article.image}" alt="${article.title}" class="img-responsive">
                 <div class="card-body">
                     <h3 class="card-title">${article.title}</h3>
                     <p class="card-text">
