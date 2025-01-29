@@ -83,6 +83,7 @@ public class SignUpFormController {
         log.log(Level.INFO, "Redirecting to the success page.");
         
         models.put("articles", service2.getAllArticles());
+        models.put("loggedInUser", service.findUserByEmail(userForm.getEmail()));
         session.setAttribute("loggedInUser", service.findUserByEmail(userForm.getEmail())); //To keep the session alive
         return "listArticles.jsp";
     } 

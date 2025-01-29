@@ -10,8 +10,16 @@ import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import deim.urv.cat.homework2.model.*;
+import jakarta.mvc.Models;
+import jakarta.servlet.http.HttpSession;
+//import jakarta.inject.Inject;
+//import jakarta.mvc.Models;
+import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.Response;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.Collections;
+//import jakarta.enterprise.context.ApplicationScoped;
 
 /**
  *
@@ -41,16 +49,34 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public ArticleDTO getArticleById(Long id) {
+    public BigArticleDTO getArticleById(Long id, UserDTO user) {
+        String authHeader = getAuthorizationHeader(user);
+
+        if (authHeader == null) {
+            return null; // Handle redirection to login in the controller
+        }
+
         Response response = webTarget.path("{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
+                .header(HttpHeaders.AUTHORIZATION, authHeader)
                 .get();
+
         if (response.getStatus() == 200) {
-            return response.readEntity(ArticleDTO.class);
+            return response.readEntity(BigArticleDTO.class);
         }
         return null;
     }
+
+    private String getAuthorizationHeader(UserDTO loggedInUser) {
+        if (loggedInUser == null || loggedInUser.getName() == null || loggedInUser.getPassword() == null) {
+            return null; // Return null if the user is not authenticated
+        }
+
+        String credentials = loggedInUser.getName() + ":" + loggedInUser.getPassword();
+        return "Basic " + Base64.getEncoder().encodeToString(credentials.getBytes(StandardCharsets.UTF_8));
+    }
+
 
     @Override
     public List<ArticleDTO> getArticlesByTopic(List<String> topicNames) {
@@ -66,13 +92,13 @@ public class ArticleServiceImpl implements ArticleService {
                 .request(MediaType.APPLICATION_JSON)
                 .get();
         if (response.getStatus() == 200) {
-            return response.readEntity(new GenericType<List<ArticleDTO>>() {});
+            return response.readEntity(new GenericType<List<ArticleDTO>>() {
+            });
         } else {
             System.err.println("Error: " + response.getStatus() + " - " + response.getStatusInfo());
             return null;
         }
     }
-
 
     @Override
     public List<ArticleDTO> getArticlesByAuthor(String author) {

@@ -106,7 +106,7 @@
                                     <c:if test="${article.isPrivate}">
                                         <span class="label label-warning">Private</span>
                                     </c:if>
-                                    <a href="${pageContext.request.contextPath}/Web/Articles/${article.id}" class="btn btn-primary">Read More</a>
+                                    <a href="${pageContext.request.contextPath}/Web/articles/${article.id}" class="btn btn-primary">Read More</a>
                                 </div>
                             </div>
                         </div>

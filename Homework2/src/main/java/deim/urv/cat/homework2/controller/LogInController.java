@@ -92,6 +92,7 @@ public class LogInController {
         attempts.reset();
         log.log(Level.INFO, "User {0} successfully signed in.", LogInForm.getEmail());
         models.put("articles", service2.getAllArticles());
+        models.put("loggedInUser", user);
         session.setAttribute("loggedInUser", user);
         return "listArticles.jsp"; // Página de éxito al iniciar sesión
     }

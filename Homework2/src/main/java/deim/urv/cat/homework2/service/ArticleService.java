@@ -5,7 +5,9 @@
 package deim.urv.cat.homework2.service;
 
 import deim.urv.cat.homework2.model.ArticleDTO;
+import deim.urv.cat.homework2.model.BigArticleDTO;
 import deim.urv.cat.homework2.model.UserDTO;
+import jakarta.mvc.Models;
 import java.util.List;
 
 /**
@@ -14,7 +16,7 @@ import java.util.List;
  */
 public interface ArticleService {
     public List<ArticleDTO> getAllArticles();
-    public ArticleDTO getArticleById(Long id);
+    public BigArticleDTO getArticleById(Long id, UserDTO user);
     public List<ArticleDTO> getArticlesByTopic(List<String> topicNames);
     public List<ArticleDTO> getArticlesByAuthor(String author);
     public List<ArticleDTO> getArticleByAuthorAndTopics(String author, List<String> topicNames);

@@ -11,6 +11,7 @@
         
     </head>
     <body>
-        
+        <p>Error page created by Arnau and Rafa.</p>
+        <strong>For more information check the log.log messages through the Glassfish Console</strong>
     </body>
 </html>

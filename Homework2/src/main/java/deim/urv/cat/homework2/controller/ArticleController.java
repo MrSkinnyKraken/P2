@@ -11,6 +11,8 @@ import jakarta.ws.rs.*;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 @Path("articles")
@@ -24,29 +26,30 @@ public class ArticleController {
     private Models models;
     @Inject
     private Logger log;
+    @Inject
+    private HttpSession session;
 
     @GET
     @Path("/{id}")
     public String getArticleById(@PathParam("id") Long id) {
-        try {
-            log.log(Level.INFO, "Fetching article with ID: {0}", id);
-            ArticleDTO article = articleService.getArticleById(id);
-            if (article != null) {
-                models.put("article", article);
-                return "article-detail.jsp"; // Forward to JSP
-            } else {
-                log.log(Level.WARNING, "Article not found with ID: {0}", id);
-                models.put("error", "Article not found");
-                return "error.jsp"; // Forward to error page
-            }
-        } catch (Exception e) {
-            log.log(Level.SEVERE, "Error fetching article: {0}", e.getMessage());
-            models.put("error", "Internal server error");
+        UserDTO loggedInUser = (UserDTO) session.getAttribute("loggedInUser");
+
+        if (loggedInUser == null) {
+            models.put("error", "You need to log in to access this article.");
+            return "login-form.jsp";
+        }
+
+        BigArticleDTO article = articleService.getArticleById(id, loggedInUser);
+
+        if (article == null) {
+            models.put("error", "Article not found or you are not authorized.");
             return "error.jsp";
         }
+
+        models.put("article", article);
+        return "article-detail.jsp";
     }
 
-    
     @GET
     public String listArticles(
             @QueryParam("topic") List<String> topic,
@@ -55,9 +58,9 @@ public class ArticleController {
         List<String> topics = articleService.getAllTopics();
         List<UserDTO> authors = articleService.getAllAuthors();
         List<ArticleDTO> articles;
-        if (topic !=null && !topic.isEmpty() && author!=null){
+        if (topic != null && !topic.isEmpty() && author != null) {
             articles = articleService.getArticleByAuthorAndTopics(author, topic);
-        }else if (topic !=null && !topic.isEmpty()) {
+        } else if (topic != null && !topic.isEmpty()) {
             articles = articleService.getArticlesByTopic(topic);
         } else if (author != null) {
             articles = articleService.getArticlesByAuthor(author);
