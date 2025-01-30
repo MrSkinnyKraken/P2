@@ -96,6 +96,10 @@ public class BigArticleDTO implements Serializable{
         this.views = views;
     }
 
+    public void setIsPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
+
     public void setFullText(String fullText) {
         this.fullText = fullText;
     }
