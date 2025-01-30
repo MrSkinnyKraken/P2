@@ -33,13 +33,14 @@ public class ArticleController {
     @Path("/{id}")
     public String getArticleById(@PathParam("id") Long id) {
         UserDTO loggedInUser = (UserDTO) session.getAttribute("loggedInUser");
-
-        if (loggedInUser == null) {
-            models.put("error", "You need to log in to access this article.");
-            return "login-form.jsp";
+        BigArticleDTO article = articleService.getArticleById(id);
+        
+        if (article.isIsPrivate()){
+            if (loggedInUser == null) {
+                models.put("error", "You need to log in to access this article.");
+                return "login-form.jsp";
+            }
         }
-
-        BigArticleDTO article = articleService.getArticleById(id, loggedInUser);
 
         if (article == null) {
             models.put("error", "Article not found or you are not authorized.");

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface ArticleService {
     public List<ArticleDTO> getAllArticles();
-    public BigArticleDTO getArticleById(Long id, UserDTO user);
+    public BigArticleDTO getArticleById(Long id);
     public List<ArticleDTO> getArticlesByTopic(List<String> topicNames);
     public List<ArticleDTO> getArticlesByAuthor(String author);
     public List<ArticleDTO> getArticleByAuthorAndTopics(String author, List<String> topicNames);

@@ -49,17 +49,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public BigArticleDTO getArticleById(Long id, UserDTO user) {
-        String authHeader = getAuthorizationHeader(user);
-
-        if (authHeader == null) {
-            return null; // Handle redirection to login in the controller
-        }
-
+    public BigArticleDTO getArticleById(Long id) {
         Response response = webTarget.path("{id}")
                 .resolveTemplate("id", id)
                 .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, authHeader)
                 .get();
 
         if (response.getStatus() == 200) {
